@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.spotless)
     alias(libs.plugins.kotlin.jvm)
     alias(libs.plugins.kotlin.spring)
+    kotlin("plugin.jpa") version "1.9.24"
 }
 
 repositories {
@@ -15,7 +16,15 @@ dependencies {
 
     implementation(libs.bundles.kotlin.all)
     implementation(libs.bundles.drools.all)
+    implementation("org.springframework.boot:spring-boot-starter-batch")
+    implementation("org.springframework.boot:spring-boot-starter-data-jdbc")
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+    runtimeOnly("com.mysql:mysql-connector-j")
 
+    testImplementation("org.springframework.boot:spring-boot-starter-test")
+    testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
+    testImplementation("org.springframework.batch:spring-batch-test")
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
     testImplementation(libs.bundles.test.all)
 }
 
