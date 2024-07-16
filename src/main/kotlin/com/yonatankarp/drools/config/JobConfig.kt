@@ -22,7 +22,7 @@ class JobConfig(private val transactionManager: DataSourceTransactionManager) : 
     protected fun createJobRepository(): JobRepository {
         val factory = JobRepositoryFactoryBean()
         factory.setDatabaseType(DatabaseType.H2.productName)
-        factory.setDataSource(dataSource())
+        factory.setDataSource(dataSource());
         factory.transactionManager = getTransactionManager()
         return factory.getObject()
     }
