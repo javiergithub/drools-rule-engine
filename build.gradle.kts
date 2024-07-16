@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.spotless)
     alias(libs.plugins.kotlin.jvm)
     alias(libs.plugins.kotlin.spring)
+    kotlin("plugin.jpa") version "1.9.24"
 }
 
 repositories {
@@ -12,18 +13,19 @@ repositories {
 
 dependencies {
     implementation(libs.springboot.webflux.starter)
-    implementation("org.springframework.boot:spring-boot-starter-batch")
-//    implementation("org.jetbrains.kotlin:kotlin-reflect")
 
     implementation(libs.bundles.kotlin.all)
     implementation(libs.bundles.drools.all)
-    runtimeOnly("com.h2database:h2")
+    implementation("org.springframework.boot:spring-boot-starter-batch")
+    implementation("org.springframework.boot:spring-boot-starter-data-jdbc")
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+    runtimeOnly("com.mysql:mysql-connector-j")
 
-    testImplementation(libs.bundles.test.all)
-//    testImplementation("org.springframework.boot:spring-boot-starter-test")
-//    testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
+    testImplementation("org.springframework.boot:spring-boot-starter-test")
+    testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
     testImplementation("org.springframework.batch:spring-batch-test")
-//    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+    testImplementation(libs.bundles.test.all)
 }
 
 tasks {
