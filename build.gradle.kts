@@ -12,11 +12,18 @@ repositories {
 
 dependencies {
     implementation(libs.springboot.webflux.starter)
+    implementation("org.springframework.boot:spring-boot-starter-batch")
+//    implementation("org.jetbrains.kotlin:kotlin-reflect")
 
     implementation(libs.bundles.kotlin.all)
     implementation(libs.bundles.drools.all)
+    runtimeOnly("com.h2database:h2")
 
     testImplementation(libs.bundles.test.all)
+//    testImplementation("org.springframework.boot:spring-boot-starter-test")
+//    testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
+    testImplementation("org.springframework.batch:spring-batch-test")
+//    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
 
 tasks {
