@@ -4,7 +4,7 @@ plugins {
     alias(libs.plugins.spotless)
     alias(libs.plugins.kotlin.jvm)
     alias(libs.plugins.kotlin.spring)
-    kotlin("plugin.jpa") version "1.9.24"
+//    alias(libs.plugins.kotlin.jpa)
 }
 
 repositories {
@@ -16,9 +16,18 @@ dependencies {
 
     implementation(libs.bundles.kotlin.all)
     implementation(libs.bundles.drools.all)
+ //   implementation("org.drools:drools-commands")
+    implementation("org.drools:drools-decisiontables")
+    implementation("org.drools:drools-mvel")
+    implementation("org.drools:drools-commands:9.44.0.Final")
+    implementation("org.drools:drools-core:9.44.0.Final")
+    // https://mvnrepository.com/artifact/org.kie/kie-ci
+    implementation("org.kie:kie-ci:9.44.0.Final")
     implementation("org.springframework.boot:spring-boot-starter-batch")
     implementation("org.springframework.boot:spring-boot-starter-data-jdbc")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+    implementation("org.duckdb:duckdb_jdbc:1.0.0")
+    implementation("org.apache.commons:commons-lang3:3.4")
     runtimeOnly("com.mysql:mysql-connector-j")
 
     testImplementation("org.springframework.boot:spring-boot-starter-test")
@@ -45,6 +54,7 @@ spotless {
         target(
             fileTree(projectDir) {
                 include("**/*.kt")
+ //               include("**/*.class")
                 exclude("**/.gradle/**")
             }
         )
@@ -56,6 +66,7 @@ spotless {
         target(
             fileTree(projectDir) {
                 include("**/*.kt")
+ //               include("**/*.class")
                 exclude("**/.gradle/**")
             }
         )

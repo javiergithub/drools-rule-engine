@@ -34,7 +34,7 @@ class PersistenceMysql2Configuration (@Autowired val env : Environment,
         val properties = HashMap<String, Any?>()
         properties["hibernate.hbm2ddl.auto"] = env.getProperty("spring.jpa.hibernate.ddl-auto")
         properties["hibernate.dialect"] = env.getProperty("spring.jpa.properties.hibernate.dialect")
-        em.setJpaPropertyMap(properties)
+        em.jpaPropertyMap = properties
 
         return em
     }

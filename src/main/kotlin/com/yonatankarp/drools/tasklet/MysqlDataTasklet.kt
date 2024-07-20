@@ -7,10 +7,7 @@ import org.springframework.batch.repeat.RepeatStatus
 import org.springframework.stereotype.Component
 
 @Component
-class MysqlDataTasklet (
-//    private val dataGetter: DataGetter,
-//    private val sharedData: SharedData
-) : Tasklet {
+class MysqlDataTasklet : Tasklet {
     override fun execute(contribution: StepContribution, chunkContext: ChunkContext): RepeatStatus {
 /*        var mysqlData : MysqlData? = dataGetter.getDataFromMysqlDB()
         if (mysqlData == null){

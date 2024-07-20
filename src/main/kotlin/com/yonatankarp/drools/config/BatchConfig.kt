@@ -6,6 +6,8 @@ import org.springframework.batch.core.JobExecution
 import org.springframework.batch.core.JobExecutionListener
 import org.springframework.batch.core.Step
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing
+import org.springframework.batch.core.configuration.annotation.JobScope
+import org.springframework.batch.core.configuration.annotation.StepScope
 import org.springframework.batch.core.job.builder.FlowBuilder
 import org.springframework.batch.core.job.builder.JobBuilder
 import org.springframework.batch.core.job.flow.Flow
@@ -27,8 +29,8 @@ class BatchConfig (
     @Bean
     fun readMysql(): Step {
         return StepBuilder("readMysql", mysqlJobConfig.jobRepository())
-            .tasklet(MysqlDataTasklet(), mysqlJobConfig.transactionManager())
- //           .transactionManager(mysqlJobConfig.transactionManager())
+            .tasklet(MysqlDataTasklet(), mysqlJobConfig.transactionManager(null))
+            .transactionManager(mysqlJobConfig.transactionManager( null ))
             .startLimit(1)
             .build()
     }
@@ -41,6 +43,7 @@ class BatchConfig (
     }
 
 
+    @JobScope
     private fun splitFlow(): Flow {
         return FlowBuilder<SimpleFlow>("splitFlow")
             .split(taskExecutor())
@@ -56,15 +59,19 @@ class BatchConfig (
             .listener(myEventListener)
             .start(splitFlow())
 //            .next(mixMysqlFlow())
-           .build()
+            .build()
             .build()
 
     }
 
 
+
+    @JobScope
     @Bean("threadPoolTaskExecutor")
     fun taskExecutor(): ThreadPoolTaskExecutor {
         val taskExecutor = ThreadPoolTaskExecutor()
+        taskExecutor.setWaitForTasksToCompleteOnShutdown(true)
+        taskExecutor.setAwaitTerminationSeconds(10)
         taskExecutor.corePoolSize = 2// Configure based on your needs
         taskExecutor.maxPoolSize = 4// Configure based on your needs
         taskExecutor.initialize()

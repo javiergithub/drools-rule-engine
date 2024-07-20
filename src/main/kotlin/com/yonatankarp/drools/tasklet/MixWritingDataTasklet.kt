@@ -8,7 +8,7 @@ import org.springframework.batch.core.step.tasklet.Tasklet
 import org.springframework.batch.repeat.RepeatStatus
 import org.springframework.stereotype.Component
 
-@Component
+//@Component
 class MixWritingDataTasklet (
     private val sharedData: SharedData,
     private val dataProcessor: DataProcessor

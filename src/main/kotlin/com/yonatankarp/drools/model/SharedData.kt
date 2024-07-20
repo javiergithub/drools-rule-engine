@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.core.env.Environment
 import org.springframework.stereotype.Component
 
-@Component
+//@Component
 class SharedData(@Autowired val mysqlDataRepository: MysqlDataRepository,
                  @Autowired val mysql2DataRepository: Mysql2DataRepository
 ) {

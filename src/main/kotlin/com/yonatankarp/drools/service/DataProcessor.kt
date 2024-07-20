@@ -6,5 +6,5 @@ import com.yonatankarp.drools.model.mysql2.Mysql2Data
 
 
 interface DataProcessor {
-    abstract fun combineData(mysql2DataList: List<Mysql2Data>, mysqlDataList: List<MysqlData>): List<DeliveredData>
+    fun combineData(mysql2DataList: List<Mysql2Data>, mysqlDataList: List<MysqlData>): List<DeliveredData>
 }
